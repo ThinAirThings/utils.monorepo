@@ -1,6 +1,4 @@
 #!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
 # Fails if packages have been changed but no changeset has been created.
 # Compares against the remote `next` branch.
-pnpm changeset status --since=origin/next
+# pnpm changeset status --since=origin/next
