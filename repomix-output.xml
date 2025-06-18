@@ -1,0 +1,500 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+.changeset/
+  config.json
+  few-owls-sort.md
+  README.md
+.github/
+  workflows/
+    release.yml
+.husky/
+  pre-commit
+packages/
+  tsconfig/
+    base.json
+    nextjs.json
+    node14.json
+    package.json
+    react-library.json
+  web-utils/
+    src/
+      nextjs/
+        get-vercel-url.ts
+      index.tsx
+    package.json
+    tsconfig.json
+    tsup.config.ts
+.gitignore
+.npmrc
+package.json
+pnpm-workspace.yaml
+README.md
+turbo.json
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path=".changeset/few-owls-sort.md">
+---
+"@thinair/web-utils": patch
+"@thinair/tsconfig": patch
+---
+
+first push
+</file>
+
+<file path=".husky/pre-commit">
+pnpm test
+</file>
+
+<file path="packages/tsconfig/base.json">
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "composite": false,
+    "declaration": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "inlineSources": false,
+    "isolatedModules": true,
+    "moduleResolution": "NodeNext",
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "preserveWatchOutput": true,
+    "skipLibCheck": true,
+    "strict": true
+  },
+  "exclude": ["node_modules"]
+}
+</file>
+
+<file path="packages/tsconfig/nextjs.json">
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "./base.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "declaration": false,
+    "declarationMap": false,
+    "incremental": true,
+    "jsx": "preserve",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "module": "esnext",
+    "moduleResolution": "Bundler",
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "target": "es5"
+  },
+  "include": ["src", "next-env.d.ts"],
+  "exclude": ["node_modules"]
+}
+</file>
+
+<file path="packages/tsconfig/node14.json">
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "./base.json",
+  "compilerOptions": {
+    "lib": ["ES2020"],
+    "module": "commonjs",
+    "target": "ES2020"
+  }
+}
+</file>
+
+<file path="packages/tsconfig/package.json">
+{
+  "name": "@thinair/tsconfig",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  }
+}
+</file>
+
+<file path="packages/tsconfig/react-library.json">
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "./base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "lib": ["dom", "ES2015"],
+    "module": "NodeNext",
+    "target": "es6"
+  }
+}
+</file>
+
+<file path="packages/web-utils/src/nextjs/get-vercel-url.ts">
+export const getVercelURL = () => {
+    let url =
+        process?.env?.NEXT_PUBLIC_SITE_URL ?? // Set this to your site URL in production env.
+        process?.env?.NEXT_PUBLIC_VERCEL_URL ?? // Automatically set by Vercel.
+        "http://localhost:3000/";
+    // Make sure to include `https://` when not localhost.
+    url = url.startsWith("http") ? url : `https://${url}`;
+    // Make sure to include a trailing `/`.
+    url = url.endsWith("/") ? url : `${url}/`;
+    return url;
+};
+</file>
+
+<file path=".changeset/config.json">
+{
+  "$schema": "https://unpkg.com/@changesets/config@2.0.0/schema.json",
+  "changelog": "@changesets/cli/changelog",
+  "baseBranch": "main",
+  "commit": false,
+  "fixed": [],
+  "linked": [],
+  "access": "public",
+  "updateInternalDependencies": "patch",
+  "ignore": []
+}
+</file>
+
+<file path=".changeset/README.md">
+# Changesets
+
+Hello and welcome! This folder has been automatically generated by `@changesets/cli`, a build tool that works
+with multi-package repos, or single-package repos to help you version and publish your code. You can
+find the full documentation for it [in our repository](https://github.com/changesets/changesets)
+
+We have a quick list of common questions to get you started engaging with this project in
+[our documentation](https://github.com/changesets/changesets/blob/main/docs/common-questions.md)
+</file>
+
+<file path=".github/workflows/release.yml">
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm 8
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+
+      - name: Setup Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+
+      - name: Install Dependencies
+        run: pnpm i
+
+      - name: Create Release Pull Request or Publish to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          # This expects you to have a script called release which does a build for your packages and calls changeset publish
+          publish: pnpm release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Send a Slack notification if a publish happens
+        if: steps.changesets.outputs.published == 'true'
+        # You can do something when a publish happens.
+        run: my-slack-bot send-notification --message "A new version of ${GITHUB_REPOSITORY} was published!"
+</file>
+
+<file path="packages/web-utils/src/index.tsx">
+export * from "./nextjs/get-vercel-url";
+</file>
+
+<file path="packages/web-utils/package.json">
+{
+  "name": "@thinair/web-utils",
+  "version": "0.0.0",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "license": "MIT",
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "tsup src/index.tsx --format esm,cjs --dts --external react",
+    "dev": "tsup src/index.tsx --format esm,cjs --watch --dts --external react",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "devDependencies": {
+    "@thinair/tsconfig": "workspace:*",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tsup": "^8.5.0",
+    "typescript": "5.8.3"
+  },
+  "dependencies": {
+    "react": "^19"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
+</file>
+
+<file path="packages/web-utils/tsconfig.json">
+{
+  "extends": "@thinair/tsconfig/react-library.json",
+  "include": ["."],
+  "exclude": ["dist", "build", "node_modules"]
+}
+</file>
+
+<file path="packages/web-utils/tsup.config.ts">
+import { defineConfig } from "tsup";
+
+export default defineConfig({
+  entry: {
+    ".": "src/index.tsx",
+  },
+  banner: {
+    js: "'use client'",
+  },
+  format: ["cjs", "esm"],
+  external: ["react"],
+  dts: true,
+});
+</file>
+
+<file path=".gitignore">
+.DS_Store
+node_modules
+.turbo
+*.log
+.next
+dist
+dist-ssr
+*.local
+.env
+.cache
+server/dist
+public/dist
+.turbo
+</file>
+
+<file path=".npmrc">
+auto-install-peers = true
+</file>
+
+<file path="package.json">
+{
+  "name": "@thinair/utilities",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "turbo run build && changeset publish",
+    "cleandep": "rm -rf node_modules && pnpm -r exec rm -rf node_modules && rm -rf pnpm-lock.yaml",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.29.4",
+    "husky": "^9.1.7",
+    "turbo": "^2.5.4"
+  },
+  "packageManager": "pnpm@10.11.0"
+}
+</file>
+
+<file path="pnpm-workspace.yaml">
+packages:
+  - "apps/*"
+  - "packages/*"
+</file>
+
+<file path="README.md">
+# @thinair/utilities
+
+This is a Turborepo starter powered by pnpm.
+
+## What's inside?
+
+This Turborepo includes the following packages:
+
+- `@thinair/web-utils`: Shared React utilities for web projects.
+- `@thinair/tsconfig`: Shared `tsconfig.json`s used throughout the monorepo.
+
+Each package is 100% [TypeScript](https://www.typescriptlang.org/).
+
+### Utilities
+
+This Turborepo has some additional tools already setup for you:
+
+- [TypeScript](https://www.typescriptlang.org/) for static type checking
+- [Changesets](https://github.com/changesets/changesets) for versioning and publishing
+
+### Useful commands
+
+- `pnpm build` - Build all packages
+- `pnpm dev` - Develop all packages
+- `pnpm lint` - Lint all packages
+- `pnpm changeset` - Generate a changeset
+- `pnpm clean` - Clean up all `node_modules` and `dist` folders
+
+### Changing the npm organization scope
+
+The npm organization scope for this starter is `@thinair`. To change this, you'll need to do the following:
+
+- Update the `name` field in all `package.json` files to replace `@thinair` with your desired scope.
+- Re-run `pnpm install`
+
+## Versioning and Publishing Packages
+
+This repository uses [Changesets](https://github.com/changesets/changesets) combined with a `main` and `next` branching strategy to manage releases. The process is automated with a GitHub Action.
+
+-   `main`: This branch contains the latest stable code. Merging pull requests into `main` triggers a production release to npm.
+-   `next`: This is the primary development branch. All feature branches should be created from `next`, and all pull requests should target `next`.
+
+To get this working, you will need to create an `NPM_TOKEN` and `GITHUB_TOKEN` in your repository settings. It's also highly recommended to install the [Changesets bot](https://github.com/apps/changeset-bot) on your GitHub repository.
+
+### Step 1: Development Workflow (on `next`)
+
+1.  **Branch from `next`**. All new work should start from the `next` branch.
+    ```sh
+    git checkout next
+    git pull origin next
+    git checkout -b your-feature-branch
+    ```
+2.  **Make your code changes**.
+3.  **Run the changeset command**. Once you're ready to commit, run the following command from the root of the repository:
+    ```sh
+    pnpm changeset
+    ```
+4.  **Select packages and provide details**. The command will prompt you to select which packages you want to release, define the version bump type (patch, minor, or major), and write a message that will be added to the `CHANGELOG.md`. This creates a new markdown file in the `.changeset` directory.
+5.  **Commit the changeset file**. Add the newly generated `.changeset/*.md` file along with your code changes to your commit.
+6.  **Open a Pull Request to `next`**. Push your branch and open a PR targeting the `next` branch. The Changesets bot will comment on your PR, showing the pending release information.
+7.  **Merge into `next`**. Once approved, merge your PR. This accumulates your changes and the versioning intent on the `next` branch, but does **not** trigger a release.
+
+### Step 2: Release Workflow (promoting `next` to `main`)
+
+When you are ready to publish a new release with all the changes accumulated on the `next` branch:
+
+1.  **Open a Pull Request from `next` to `main`**. This "Release PR" will contain all the new features and fixes ready for production. The Changesets bot will provide a consolidated view of all versions and changelog entries for the upcoming release.
+2.  **Merge the PR into `main`**. Once this Release PR is merged, the release process is fully automated by the `.github/workflows/release.yml` GitHub Action.
+
+Here's what happens automatically:
+
+1.  **The Action Triggers**: The push to `main` starts the `Release` workflow.
+2.  **Version Bump & Publish**: The `changesets/action` consumes all accumulated changeset files, bumps package versions, updates changelogs, publishes the packages to npm, and creates Git tags.
+3.  **Commit back to `main`**: The action commits the version updates (e.g., "Release @thinair/web-utils@0.1.0") and updated `CHANGELOG.md` files back to the `main` branch.
+
+### Step 3: Post-Release Sync
+
+After a successful release, it's important to update the `next` branch with the version bumps from `main`.
+
+1.  **Merge `main` back into `next`**:
+    ```sh
+    git checkout next
+    git pull origin next
+    git merge main
+    git push origin next
+    ```
+
+This flow ensures that `main` is always a clean, releasable reflection of your production code, while `next` serves as the integration branch for upcoming features.
+
+### npm
+
+If you want to publish package to the public npm registry and make them publicly available, this is already setup.
+
+To publish packages to a private npm organization scope, **remove** the following from each of the `package.json`'s
+
+```diff
+- "publishConfig": {
+-  "access": "public"
+- },
+```
+
+### GitHub Package Registry
+
+See [Working with the npm registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry#publishing-a-package-using-publishconfig-in-the-packagejson-file)
+</file>
+
+<file path="turbo.json">
+{
+  "$schema": "https://turborepo.com/schema.json",
+  "tasks": {
+    "build": {
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"],
+      "dependsOn": ["^build"]
+    },
+    "test": {
+      "outputs": ["coverage/**"],
+      "dependsOn": []
+    },
+    "lint": {},
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "clean": {
+      "cache": false
+    }
+  }
+}
+</file>
+
+</files>
