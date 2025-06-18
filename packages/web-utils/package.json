@@ -1,0 +1,30 @@
+{
+  "name": "@thinair/web-utils",
+  "version": "0.0.0",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "license": "MIT",
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "tsup src/index.tsx --format esm,cjs --dts --external react",
+    "dev": "tsup src/index.tsx --format esm,cjs --watch --dts --external react",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "devDependencies": {
+    "@thinair/tsconfig": "workspace:*",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tsup": "^8.5.0",
+    "typescript": "5.8.3"
+  },
+  "dependencies": {
+    "react": "^19"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
