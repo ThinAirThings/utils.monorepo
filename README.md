@@ -6,6 +6,7 @@ This is a Turborepo starter powered by pnpm.
 
 This Turborepo includes the following packages:
 
+- `@thinair/docs`: A CLI tool to automatically generate documentation for all your project's dependencies. It scrapes documentation websites, summarizes the content with AI, and creates a unified, easy-to-read markdown file.
 - `@thinair/web-utils`: Shared React utilities for web projects.
 - `@thinair/tsconfig`: Shared `tsconfig.json`s used throughout the monorepo.
 
